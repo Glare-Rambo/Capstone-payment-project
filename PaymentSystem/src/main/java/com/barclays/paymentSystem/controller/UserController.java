@@ -39,7 +39,7 @@ public class UserController {
 	
 	@PostMapping(value = "/register-user")
 	public ResponseEntity<String> adduser(@Valid @RequestBody User user) throws PaymentsException {
-		User usr = userService.addUser(user);
+		User usr = userService.registerUser(user);
 		String successMessage = environment.getProperty("API.INSERT_SUCCESS") + usr;
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}

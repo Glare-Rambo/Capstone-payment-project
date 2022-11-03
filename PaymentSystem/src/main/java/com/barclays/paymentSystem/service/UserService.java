@@ -25,7 +25,7 @@ public class UserService {
 	}
 	
 	
-	public User addUser(User user) {
+	public User registerUser(User user) {
 		User user1 = new User();
 		user1.setLoginId(user.getLoginId());
 		user1.setPassword(user.getPassword());
