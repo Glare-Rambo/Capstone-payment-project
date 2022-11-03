@@ -1,11 +1,17 @@
 package com.barclays.paymentSystem.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.barclays.paymentSystem.entity.RegisteredBiller;
+import com.barclays.paymentSystem.exception.PaymentsException;
 import com.barclays.paymentSystem.service.ExportToCsvService;
 import com.barclays.paymentSystem.service.RegisteredBillerService;
 import com.barclays.paymentSystem.service.UserService;
@@ -26,4 +32,10 @@ public class RegisteredBillerController {
 
 	@Autowired
 	private Environment environment;
+	
+	@GetMapping(value = "/registeredBillers")
+	public ResponseEntity<List<RegisteredBiller>> getAllbillers() throws PaymentsException {
+		return registeredBillerService.getAllBillers();
+		
+	}
 }
