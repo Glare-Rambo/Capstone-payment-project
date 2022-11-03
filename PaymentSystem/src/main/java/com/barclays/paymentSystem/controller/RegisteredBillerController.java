@@ -45,4 +45,10 @@ public class RegisteredBillerController {
 		return registeredBillerService.getBillers(sequenceId);
 		
 	}
+	
+	@DeleteMapping(value = "/deleteBillers/{billerSequenceId}")
+    public ResponseEntity<String> deletebiller(@PathVariable Integer billerSequenceId) throws PaymentsException {
+        return registeredBillerService.deleteBiller(billerSequenceId);
+        
+    }
 }

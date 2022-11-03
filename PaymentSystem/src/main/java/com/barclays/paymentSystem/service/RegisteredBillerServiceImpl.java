@@ -72,5 +72,16 @@ public class RegisteredBillerServiceImpl implements RegisteredBillerService {
 		return new ResponseEntity<>(RegisteredBillerss, HttpStatus.OK);
 		
 	}
+	
+	@Override
+    public ResponseEntity<String> deleteBiller(Integer billerSequenceId) throws PaymentsException {
+        
+        Optional<RegisteredBiller> register= registeredBillerRepository.findById(billerSequenceId);
+        register.orElseThrow(() -> new PaymentsException("Service.BILLER_NOT_FOUND"));
+        registeredBillerRepository.deleteById(billerSequenceId);
+        String successMessage = environment.getProperty("API.BILLER_DELETE_SUCCESS");
+        return new ResponseEntity<>(successMessage, HttpStatus.OK);
+        
+    }
 
 }
