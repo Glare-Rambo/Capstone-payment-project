@@ -48,20 +48,20 @@ public class BillController {
 		
 	}
 	
-	@PostMapping(value = "/payment")
-	public ResponseEntity<String> manualPay(@RequestBody AccountTransaction 
-			accountTransaction)
-			throws PaymentsException {
-		
-		return billsService.manualPay(accountTransaction);
-		
-	}
+//	@PostMapping(value = "/payment")
+//	public ResponseEntity<String> manualPay(@RequestBody AccountTransaction 
+//			accountTransaction)
+//			throws PaymentsException {
+//		
+//		return billsService.manualPay(accountTransaction);
+//		
+//	}
 	
-	@PostMapping(value = "/account-transaction-details")
-	public ResponseEntity<String> accountTransactionDetails(@RequestBody AccountTransaction accountTransaction)
+	@PostMapping(value = "/payment")
+	public ResponseEntity<String> accountTransaction(@RequestBody AccountTransaction accountTransaction)
 			throws PaymentsException {
 		
-		return billsService.accountTransactionDetails(accountTransaction);
+		return billsService.accountTransaction(accountTransaction);
 		
 	}
 }

@@ -118,41 +118,42 @@ public class BillService {
 		return new ResponseEntity<>(str, HttpStatus.OK);
 	}
 	
-	public ResponseEntity<String> manualPay(AccountTransaction accountTransaction) throws PaymentsException {
-		AccountTransaction accountTrans = new AccountTransaction();
-		accountTrans.setAmount(accountTransaction.getAmount());
-		accountTrans.setDate(LocalDate.now());
-		accountTrans.setBill_ref_num(accountTransaction.getBill_ref_num());
-		accountTrans.setSequence_id(accountTransaction.getSequence_id());
-		accountTrans.setTransaction_type("Debit");
-		accountTrans.setDescription(accountTransaction.getDescription());
-		
-		
-		
-		AccountTransaction accountTrans2 = accountTransactionRepository.save(accountTrans);
-		
-		Optional<Account> accounts= accountsRepository.findById(accountTransaction.getSequence_id());
-		Account a = accounts.orElseThrow(() -> new PaymentsException("Service.USER_NOT_FOUND"));
-		a.setCurrentBalance(a.getCurrentBalance()- accountTrans2.getAmount());
-		
-		Optional<Bill> bill= billsRepository.findById(accountTrans2.getBill_ref_num());
-		
-		Bill b= bill.orElseThrow(() -> new PaymentsException("Service.USER_NOT_FOUND"));
-		
-		b.setStatus(1);
-		
-		String successMessage = environment.getProperty("API.PAYMENT_SUCCESSFULL")+ accountTrans2.getBill_ref_num();;
-		
-		EmailDetail details=new EmailDetail();
-		details.setRecipient(a.getEmail());
-		details.setMsgBody("Payment Successful for Bill Number"+accountTrans2.getBill_ref_num());
-		details.setSubject("Payment Information");
-		//emailService.sendSimpleMail(details);
-		return new ResponseEntity<>(successMessage, HttpStatus.OK);
-		
-	}
+//	public ResponseEntity<String> manualPay(AccountTransaction accountTransaction) throws PaymentsException {
+//		AccountTransaction accountTrans = new AccountTransaction();
+//		accountTrans.setTrans_ref_num(accountTransaction.getTrans_ref_num());
+//		accountTrans.setAmount(accountTransaction.getAmount());
+//		accountTrans.setDate(LocalDate.now());
+//		accountTrans.setBill_ref_num(accountTransaction.getBill_ref_num());
+//		accountTrans.setSequence_id(accountTransaction.getSequence_id());
+//		accountTrans.setTransaction_type("Debit");
+//		accountTrans.setDescription(accountTransaction.getDescription());
+//		
+//		
+//		
+//		AccountTransaction accountTrans2 = accountTransactionRepository.save(accountTrans);
+//		
+//		Optional<Account> accounts= accountsRepository.findById(accountTransaction.getSequence_id());
+//		Account a = accounts.orElseThrow(() -> new PaymentsException("Service.USER_NOT_FOUND"));
+//		a.setCurrentBalance(a.getCurrentBalance()- accountTrans2.getAmount());
+//		
+//		Optional<Bill> bill= billsRepository.findById(accountTrans2.getBill_ref_num());
+//		
+//		Bill b= bill.orElseThrow(() -> new PaymentsException("Service.USER_NOT_FOUND"));
+//		
+//		b.setStatus(1);
+//		
+//		String successMessage = environment.getProperty("API.PAYMENT_SUCCESSFULL")+ accountTrans2.getBill_ref_num();;
+//		
+//		EmailDetail details=new EmailDetail();
+//		details.setRecipient(a.getEmail());
+//		details.setMsgBody("Payment Successful for Bill Number"+accountTrans2.getBill_ref_num());
+//		details.setSubject("Payment Information");
+//		//emailService.sendSimpleMail(details);
+//		return new ResponseEntity<>(successMessage, HttpStatus.OK);
+//		
+//	}
 	
-	public ResponseEntity<String> accountTransactionDetails(AccountTransaction accountTransactions) {
+	public ResponseEntity<String> accountTransaction(AccountTransaction accountTransactions) {
 		AccountTransaction accountTrans = new AccountTransaction();
 		
 		accountTrans.setTrans_ref_num(accountTransactions.getTrans_ref_num());
