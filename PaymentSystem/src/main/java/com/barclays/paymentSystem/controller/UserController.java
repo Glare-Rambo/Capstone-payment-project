@@ -2,12 +2,16 @@ package com.barclays.paymentSystem.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,5 +34,13 @@ public class UserController {
 	public ResponseEntity<List<User>> getAllusers() throws PaymentsException {
 		List<User> userList = userService.getAllUsers();
 		return new ResponseEntity<>(userList, HttpStatus.OK);
+	}
+	
+	
+	@PostMapping(value = "/register-user")
+	public ResponseEntity<String> adduser(@Valid @RequestBody User user) throws PaymentsException {
+		User usr = userService.addUser(user);
+		String successMessage = environment.getProperty("API.INSERT_SUCCESS") + usr;
+		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
 	}
 }

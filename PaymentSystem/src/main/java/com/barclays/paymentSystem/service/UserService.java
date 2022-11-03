@@ -23,4 +23,21 @@ public class UserService {
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
 	}
+	
+	
+	public User addUser(User user) {
+		User user1 = new User();
+		user1.setLoginId(user.getLoginId());
+		user1.setPassword(user.getPassword());
+		user1.setRoleName(user.getRoleName());
+		user1.setLinkedAccountSequenceId(user.getLinkedAccountSequenceId());
+		if (user.getRoleName().equals("Bank_Manager")) {
+			user1.setRoleId(1);
+		} else {
+			user1.setRoleId(2);
+		}
+
+		return userRepository.save(user1);
+	}
+
 }
