@@ -55,5 +55,31 @@ public class UserService {
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
 	}
+	
+	public User getUserById(Integer userId) throws PaymentsException {
+		Optional<User> optional = userRepository.findById(userId);
+		User user = optional.orElseThrow(() -> new PaymentsException("Service.CUSTOMER_NOT_FOUND"));
+		User user2 = new User();
+		user2.setLoginId(user.getLoginId());
+		user2.setPassword(user.getPassword());
+		user2.setRoleId(user.getRoleId());
+		user2.setLinkedAccountSequenceId(user.getLinkedAccountSequenceId());
+		user2.setRoleName(user.getRoleName());
+
+		return user2;
+	}
+	
+	public void updateUser(Integer userId, String password) throws PaymentsException {
+		Optional<User> user = userRepository.findById(userId);
+		User c = user.orElseThrow(() -> new PaymentsException("Service.CUSTOMER_NOT_FOUND"));
+		c.setPassword(password);
+
+	}
+	
+	public void deleteUser(Integer loginId) throws PaymentsException {
+		Optional<User> user = userRepository.findById(loginId);
+		user.orElseThrow(() -> new PaymentsException("Service.CUSTOMER_NOT_FOUND"));
+		userRepository.deleteById(loginId);
+	}
 
 }
