@@ -76,6 +76,23 @@ public class RegisteredBillerServiceImpl implements RegisteredBillerService {
 	}
 	
 	@Override
+	public ResponseEntity<String> registerBiller(Integer AccountNumber,RegisteredBiller registerBillerEnt) throws PaymentsException {
+		
+		RegisteredBiller registerBiller = new RegisteredBiller();
+		
+		registerBiller.setBillerCode(registerBillerEnt.getBillerCode());
+		registerBiller.setConsumerNumber(registerBillerEnt.getConsumerNumber());
+		registerBiller.setAccountNumber(AccountNumber);
+		
+		
+		RegisteredBiller biller2 = registeredBillerRepository.save(registerBiller);//PERSISTING IN DATABASE
+		
+		String successMessage = ""; //environment.getProperty("API.REGISTERED_BILLER");
+		return new ResponseEntity<>(successMessage, HttpStatus.OK);
+		
+	}
+	
+	@Override
     public ResponseEntity<String> deleteBiller(Integer billerSequenceId) throws PaymentsException {
         
         Optional<RegisteredBiller> register= registeredBillerRepository.findById(billerSequenceId);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.barclays.paymentSystem.entity.AccountTransaction;
 import com.barclays.paymentSystem.entity.Bill;
 import com.barclays.paymentSystem.exception.PaymentsException;
 import com.barclays.paymentSystem.service.BillService;
@@ -38,6 +39,29 @@ public class BillController {
 	@GetMapping(value ="/getBills/{billerCode}")
 	public ResponseEntity<List<String>> getbills(@PathVariable Integer billerCode) throws PaymentsException {
 		return billsService.getBills(billerCode);
+		
+	}
+	
+	@GetMapping(value ="/get-all-Bills")
+	public ResponseEntity<List<String>> getallbills() throws PaymentsException {
+		return billsService.getAllBills();
+		
+	}
+	
+	@PostMapping(value = "/payment")
+	public ResponseEntity<String> manualPay(@RequestBody AccountTransaction 
+			accountTransaction)
+			throws PaymentsException {
+		
+		return billsService.manualPay(accountTransaction);
+		
+	}
+	
+	@PostMapping(value = "/account-transaction-details")
+	public ResponseEntity<String> accountTransactionDetails(@RequestBody AccountTransaction accountTransaction)
+			throws PaymentsException {
+		
+		return billsService.accountTransactionDetails(accountTransaction);
 		
 	}
 }

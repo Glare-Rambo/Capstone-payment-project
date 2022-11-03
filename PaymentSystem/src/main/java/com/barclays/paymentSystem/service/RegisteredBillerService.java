@@ -13,6 +13,9 @@ public interface RegisteredBillerService {
 	
 	ResponseEntity<List<RegisteredBiller>> getBillers(Integer sequenceId) throws PaymentsException;
 	
+	ResponseEntity<String> registerBiller(Integer SequenceId, RegisteredBiller registerBillerEnt)
+			throws PaymentsException;
+	
 	ResponseEntity<String> deleteBiller(Integer billerSequenceId) throws PaymentsException;
 
 	
