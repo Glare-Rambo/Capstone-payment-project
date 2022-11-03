@@ -30,17 +30,22 @@ public class UserController {
 	@Autowired
 	private Environment environment;
 	
-	@GetMapping(value = "/get-all-user")
-	public ResponseEntity<List<User>> getAllusers() throws PaymentsException {
-		List<User> userList = userService.getAllUsers();
-		return new ResponseEntity<>(userList, HttpStatus.OK);
-	}
-	
-	
 	@PostMapping(value = "/register-user")
 	public ResponseEntity<String> adduser(@Valid @RequestBody User user) throws PaymentsException {
 		User usr = userService.registerUser(user);
 		String successMessage = environment.getProperty("API.INSERT_SUCCESS") + usr;
 		return new ResponseEntity<>(successMessage, HttpStatus.CREATED);
+	}
+	
+	@PostMapping(value = "/login")
+	public ResponseEntity<String> loginUser(@Valid @RequestBody User user) throws PaymentsException {
+		return userService.loginUser(user);
+		
+	}
+	
+	@GetMapping(value = "/get-all-user")
+	public ResponseEntity<List<User>> getAllusers() throws PaymentsException {
+		List<User> userList = userService.getAllUsers();
+		return new ResponseEntity<>(userList, HttpStatus.OK);
 	}
 }

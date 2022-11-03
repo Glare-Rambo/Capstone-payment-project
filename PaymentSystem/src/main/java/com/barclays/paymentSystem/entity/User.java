@@ -34,6 +34,16 @@ public class User {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	public User(Integer loginId, String password) {
+		super();
+		this.loginId = loginId;
+		this.password = password;
+	}
+
+
 
 	public User(Integer loginId, @NotNull(message = "{user.password.absent}") String password,
 			@NotNull(message = "{user.role.absent}") String role_name,
