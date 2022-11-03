@@ -51,4 +51,26 @@ public class RegisteredBillerServiceImpl implements RegisteredBillerService {
 		
 		return new ResponseEntity<>(RegisteredBillerss, HttpStatus.OK);
 	}
+	
+	@Override
+	public ResponseEntity<List<RegisteredBiller>> getBillers(Integer AccountNumber) throws PaymentsException {
+	
+		Iterable<RegisteredBiller> billers = registeredBillerRepository.findByAccountNumber(AccountNumber);
+		List<RegisteredBiller> RegisteredBillerss = new ArrayList<>();
+		
+		billers.forEach(biller -> {
+			RegisteredBiller rb = new RegisteredBiller();
+			
+			rb.setBillerCode(biller.getBillerCode());
+			rb.setBillerSequenceId(biller.getBillerSequenceId());
+			rb.setConsumerNumber(biller.getConsumerNumber());
+			rb.setAccountNumber(biller.getAccountNumber());
+			RegisteredBillerss.add(rb);
+		});
+		if (RegisteredBillerss.isEmpty())
+			throw new PaymentsException("Service.BILLER_NOT_FOUND");
+		return new ResponseEntity<>(RegisteredBillerss, HttpStatus.OK);
+		
+	}
+
 }

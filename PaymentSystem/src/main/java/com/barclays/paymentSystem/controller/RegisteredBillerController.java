@@ -7,6 +7,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,6 +37,12 @@ public class RegisteredBillerController {
 	@GetMapping(value = "/registeredBillers")
 	public ResponseEntity<List<RegisteredBiller>> getAllbillers() throws PaymentsException {
 		return registeredBillerService.getAllBillers();
+		
+	}
+	
+	@GetMapping(value = "/registeredBillers/{sequenceId}")
+	public ResponseEntity<List<RegisteredBiller>> getbillers(@PathVariable Integer sequenceId) throws PaymentsException {
+		return registeredBillerService.getBillers(sequenceId);
 		
 	}
 }
