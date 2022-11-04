@@ -64,4 +64,10 @@ public class BillController {
 		return billsService.accountTransaction(accountTransaction);
 		
 	}
+	
+	@GetMapping(value ="/get-all-transaction")
+	public ResponseEntity<List<String>> getAllTransaction() throws PaymentsException {
+		return billsService.getAllTransactions();
+		
+	}
 }
