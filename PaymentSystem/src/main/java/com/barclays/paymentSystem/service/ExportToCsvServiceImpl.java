@@ -39,6 +39,7 @@ public class ExportToCsvServiceImpl implements ExportToCsvService {
 		
 		transactions.forEach(tr -> {
 			AccountTransaction at = new AccountTransaction();
+			at.setTrans_ref_num(tr.getTrans_ref_num());
 			at.setAmount(tr.getAmount());
 			at.setBill_ref_num(tr.getBill_ref_num());
 			at.setDate(tr.getDate());
@@ -77,16 +78,6 @@ public class ExportToCsvServiceImpl implements ExportToCsvService {
          
         csvWriter.close();
         csvWriter2.close();
-		
-        
-//        String mimeType = "text/csv";
-//        response.setContentType(mimeType);
-//        String reportFileName = "AccountTransaction.csv";
-//        response.setHeader("Content-Disposition", String.format("attachment; filename=\""+reportFileName+"\""));
-//        response.setContentLength((int) reportFile.length());
-//        InputStream inputStream = new BufferedInputStream(new FileInputStream(reportFile));
-//
-//        FileCopyUtils.copy(inputStream, response.getOutputStream());
-//        response.flushBuffer();
+
 	}
 }
