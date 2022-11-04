@@ -49,14 +49,14 @@ public class RegisteredBillerController {
 		
 	}
 	
-	@PostMapping(value = "/registerBiller/{sequenceId}")
-	public ResponseEntity<String> registerBiller(@PathVariable Integer sequenceId, @RequestBody RegisteredBiller
-			registerBillers)
-			throws PaymentsException {
-		
-		return registeredBillerService.registerBiller(sequenceId,registerBillers );
-		
-	}
+//	@PostMapping(value = "/registerBiller/{sequenceId}")
+//	public ResponseEntity<String> registerBiller(@PathVariable Integer sequenceId, @RequestBody RegisteredBiller
+//			registerBillers)
+//			throws PaymentsException {
+//		
+//		return registeredBillerService.registerBiller(sequenceId,registerBillers );
+//		
+//	}
 	
 	@DeleteMapping(value = "/deleteBillers/{billerSequenceId}")
     public ResponseEntity<String> deletebiller(@PathVariable Integer billerSequenceId) throws PaymentsException {

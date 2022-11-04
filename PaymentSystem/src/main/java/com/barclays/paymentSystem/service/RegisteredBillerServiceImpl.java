@@ -82,7 +82,7 @@ public class RegisteredBillerServiceImpl implements RegisteredBillerService {
 		
 		registerBiller.setBillerCode(registerBillerEnt.getBillerCode());
 		registerBiller.setConsumerNumber(registerBillerEnt.getConsumerNumber());
-		registerBiller.setAccountNumber(AccountNumber);
+		registerBiller.setAccountNumber(registerBillerEnt.getAccountNumber());
 		
 		
 		RegisteredBiller biller2 = registeredBillerRepository.save(registerBiller);//PERSISTING IN DATABASE

@@ -170,4 +170,23 @@ public class BillService {
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 		
 	}
+	
+	public ResponseEntity<List<String>> getAllTransactions() throws PaymentsException {
+		Iterable<AccountTransaction> trans = accountTransactionRepository.findAll();
+		List<String> str = new ArrayList<>();
+		
+		trans.forEach(biller -> {
+			String st="";
+			
+			st=st+"SequenceId: "+biller.getSequence_id()
+			+" Transaction Reference Number: "+biller.getTrans_ref_num()+" Paid Amount: "+biller.getAmount() + 
+			" Bill Reference Number: "+biller.getBill_ref_num() + " Description: " + biller.getDescription() + 
+			" Transaction Type: " + biller.getTransaction_type() + " Transaction Date: " + biller.getDate();
+			str.add(st);
+			
+		});
+		
+		
+		return new ResponseEntity<>(str, HttpStatus.OK);
+	}
 }
