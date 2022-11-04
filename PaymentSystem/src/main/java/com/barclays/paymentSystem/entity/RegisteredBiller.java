@@ -14,7 +14,7 @@ public class RegisteredBiller {
 	private Integer billerSequenceId;
 	private Integer billerCode;
 	private String consumerNumber;
-	private Integer accountNumber;
+	private String accountNumber;
 	
 	
 	
@@ -37,10 +37,10 @@ public class RegisteredBiller {
 	public void setConsumerNumber(String consumerNumber) {
 		this.consumerNumber = consumerNumber;
 	}
-	public Integer getAccountNumber() {
+	public String getAccountNumber() {
 		return accountNumber;
 	}
-	public void setAccountNumber(Integer accountNumber) {
+	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 	
