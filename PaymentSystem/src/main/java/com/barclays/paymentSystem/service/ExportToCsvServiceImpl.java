@@ -30,7 +30,7 @@ public class ExportToCsvServiceImpl implements ExportToCsvService {
 	@Override
 	public void listall(HttpServletResponse response) throws IOException, PaymentsException {
 		
-		String outputFileName = "D:\\Barclays training material\\final project\\CapstonePayment\\Barclays_Payments_Project\\ReportFile\\AccountTransaction" + ".csv";
+		String outputFileName = "D:\\finalProject\\PaymentSystem\\ReportFile\\AccountTransaction" + ".csv";
         // Change the file location
         File reportFile = new File(outputFileName);
 		
@@ -45,7 +45,7 @@ public class ExportToCsvServiceImpl implements ExportToCsvService {
 			at.setDate(tr.getDate());
 			at.setDescription(tr.getDescription());
 			at.setSequence_id(tr.getSequence_id());
-			at.setTransaction_type(at.getTransaction_type());
+			//at.setTransaction_type(at.getTransaction_type());
 			
 			trans.add(at);
 		});
@@ -65,8 +65,8 @@ public class ExportToCsvServiceImpl implements ExportToCsvService {
         response.reset();
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
         ICsvBeanWriter csvWriter2 = new CsvBeanWriter(new FileWriter(outputFileName), CsvPreference.STANDARD_PREFERENCE);
-        String[] csvHeader = {"Transaction Reference Number", "Amount", "Bill Reference Number", "Date", "Description"," SequenceId","Transaction Type"};
-        String[] nameMapping = {"trans_ref_num", "amount", "bill_ref_num", "date","description", "sequence_id","transaction_type"};
+        String[] csvHeader = {"Transaction Reference Number", "Amount", "Bill Reference Number", "Date", "Description"," SequenceId"};
+        String[] nameMapping = {"trans_ref_num", "amount", "bill_ref_num", "date","description", "sequence_id"};
          
         csvWriter.writeHeader(csvHeader);
         csvWriter2.writeHeader(csvHeader);

@@ -32,6 +32,12 @@ public class Account {
 	public String getName() {
 		return name;
 	}
+	public Integer getBillSequenceId() {
+		return billSequenceId;
+	}
+	public void setBillSequenceId(Integer billSequenceId) {
+		this.billSequenceId = billSequenceId;
+	}
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -47,6 +53,7 @@ public class Account {
 	public void setCurrentBalance(Long currentBalance) {
 		this.currentBalance = currentBalance;
 	}
+	
 	@Override
 	public String toString() {
 		return "Account [sequenceId=" + sequenceId + ", accountNo=" + accountNo + ", name=" + name + ", email=" + email
