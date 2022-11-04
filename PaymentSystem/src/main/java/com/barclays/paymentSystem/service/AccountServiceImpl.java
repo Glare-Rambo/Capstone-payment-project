@@ -29,6 +29,7 @@ public class AccountServiceImpl implements AccountService {
 		accounts.forEach(account -> {
 			Account ac = new Account();
 			
+			ac.setSequenceId(account.getSequenceId());
 			ac.setAccountNo(account.getAccountNo());
 			ac.setName(account.getName());
 			ac.setEmail(account.getEmail());
